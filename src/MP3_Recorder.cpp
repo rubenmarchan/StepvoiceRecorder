@@ -1,4 +1,4 @@
-/*
+п»ї/*
 Stepvoice Recorder
 Copyright (C) 2004-2016 Andrey Firsov
 */
@@ -86,29 +86,31 @@ void CAboutDlg::DoDataExchange(CDataExchange* pDX)
 }
 //---------------------------------------------------------------------------
 
-void CAboutDlg::OnPlayerIcon() 
+void CAboutDlg::OnPlayerIcon()
 {
-	CStatic* wndRecIcon = (CStatic *)GetDlgItem(IDC_PLAYERICON);
-	if(m_bRecIcon)
-	{	SetTimer(1, 900, NULL);
-	wndRecIcon->SetIcon(AfxGetApp()->LoadIcon(IDR_MAINFRAME2));
+	CStatic* wndRecIcon = (CStatic*)GetDlgItem(IDC_PLAYERICON);
+	if (m_bRecIcon)
+	{
+		SetTimer(1, 900, NULL);
+		wndRecIcon->SetIcon(AfxGetApp()->LoadIcon(IDR_MAINFRAME2));
 	}
 	else
-	{	KillTimer(1);
-	wndRecIcon->SetIcon(AfxGetApp()->LoadIcon(IDR_MAINFRAME));
+	{
+		KillTimer(1);
+		wndRecIcon->SetIcon(AfxGetApp()->LoadIcon(IDR_MAINFRAME));
 	}
 
 	m_bRecIcon = !m_bRecIcon;
 }
 //---------------------------------------------------------------------------
 
-void CAboutDlg::OnTimer(UINT nIDEvent) 
+void CAboutDlg::OnTimer(UINT nIDEvent)
 {
 	static bool bRecIcon = false;
-	if(nIDEvent == 1)
+	if (nIDEvent == 1)
 	{
-		CStatic* wndRecIcon = (CStatic *)GetDlgItem(IDC_PLAYERICON);
-		if(bRecIcon)
+		CStatic* wndRecIcon = (CStatic*)GetDlgItem(IDC_PLAYERICON);
+		if (bRecIcon)
 			wndRecIcon->SetIcon(AfxGetApp()->LoadIcon(IDR_MAINFRAME2));
 		else
 			wndRecIcon->SetIcon(AfxGetApp()->LoadIcon(IDR_MAINFRAME));
@@ -118,7 +120,7 @@ void CAboutDlg::OnTimer(UINT nIDEvent)
 }
 //---------------------------------------------------------------------------
 
-BOOL CAboutDlg::OnInitDialog() 
+BOOL CAboutDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
@@ -138,14 +140,14 @@ BOOL CAboutDlg::OnInitDialog()
 		l_wnd_text += l_thanks_to[i++];
 	}
 
-	CEdit* pThanksEdit = (CEdit *)GetDlgItem(IDC_THANKSTO);
+	CEdit* pThanksEdit = (CEdit*)GetDlgItem(IDC_THANKSTO);
 	pThanksEdit->SetWindowText(l_wnd_text);
 
 	// Preparing version string.
 
 	CString l_format_string;
 	GetDlgItemText(IDC_STATIC_VERSION, l_format_string);
-	
+
 	CString l_version_string;
 	l_version_string.Format(l_format_string, STRFILEVER);
 	SetDlgItemText(IDC_STATIC_VERSION, l_version_string);
@@ -189,21 +191,21 @@ static const UINT UWM_PARSE_LINE = ::RegisterWindowMessage(
 ////////////////////////////////////////////////////////////////////////////////
 BOOL CALLBACK CMP3_RecorderApp::searcher(HWND hWnd, LPARAM lParam)
 {
-    DWORD result;
-    LRESULT ok = ::SendMessageTimeout(hWnd, UWM_ARE_YOU_ME, 0, 0,
-                                      SMTO_BLOCK | SMTO_ABORTIFHUNG, 200,
-                                      &result);
-    if(ok == 0)
-    return TRUE; // игнорируем это окно и продолжаем
+	DWORD result;
+	LRESULT ok = ::SendMessageTimeout(hWnd, UWM_ARE_YOU_ME, 0, 0,
+		SMTO_BLOCK | SMTO_ABORTIFHUNG, 200,
+		&result);
+	if (ok == 0)
+		return TRUE; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    if(result == UWM_ARE_YOU_ME)
-    { /* нашли */
-        HWND * target = (HWND *)lParam;
-        *target = hWnd;
-        return FALSE; // заканчиваем поиск
-    } /* нашли */
+	if (result == UWM_ARE_YOU_ME)
+	{ /* пїЅпїЅпїЅпїЅпїЅ */
+		HWND* target = (HWND*)lParam;
+		*target = hWnd;
+		return FALSE; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+	} /* пїЅпїЅпїЅпїЅпїЅ */
 
-    return TRUE; // продолжаем поиск
+	return TRUE; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 } // CMyApp::searcher
 
 
@@ -214,14 +216,14 @@ bool CMP3_RecorderApp::IsNeedOneInstance()
 
 bool CMP3_RecorderApp::IsAlreadyRunning()
 {
-    HANDLE hMutexOneInstance = ::CreateMutex( NULL, FALSE,
-        _T("SVREC-169A0B91-77B7-4533-9C25-59FCB08FCD614"));
+	HANDLE hMutexOneInstance = ::CreateMutex(NULL, FALSE,
+		_T("SVREC-169A0B91-77B7-4533-9C25-59FCB08FCD614"));
 
 	bool l_already_running = (::GetLastError() == ERROR_ALREADY_EXISTS ||
-							  ::GetLastError() == ERROR_ACCESS_DENIED);
-    // вызов возвращает ERROR_ACCESS_DENIED, если мьютекс был создан
-    // в другой пользовательской сессии, т.к. в качестве параметра
-    // SECURITY_ATTRIBUTES при создании мьютекса передается NULL
+		::GetLastError() == ERROR_ACCESS_DENIED);
+	// пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ERROR_ACCESS_DENIED, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	// пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ.пїЅ. пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	// SECURITY_ATTRIBUTES пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ NULL
 
 	return l_already_running;
 }
@@ -238,11 +240,11 @@ BOOL CMP3_RecorderApp::InitInstance()
 	const int CMD_LENGTH = l_cmd_line.GetLength();
 
 	if (this->IsAlreadyRunning() && this->IsNeedOneInstance())
-    {
-        HWND hOther = NULL;
-        EnumWindows(searcher, (LPARAM)&hOther);
-        if ( hOther != NULL )
-        {
+	{
+		HWND hOther = NULL;
+		EnumWindows(searcher, (LPARAM)&hOther);
+		if (hOther != NULL)
+		{
 			if (CMD_LENGTH > 0)
 			{
 				_tcsncpy_s(g_command_line, MAX_PATH,
@@ -251,13 +253,13 @@ BOOL CMP3_RecorderApp::InitInstance()
 			}
 			else
 			{
-				::SetForegroundWindow( hOther );
-				::ShowWindow( hOther, SW_RESTORE );
+				::SetForegroundWindow(hOther);
+				::ShowWindow(hOther, SW_RESTORE);
 			}
 			return FALSE; // window exist, exiting this instance
-        }
+		}
 		//return FALSE; // exiting
-    }
+	}
 
 	//Initializing logger after the running instance check (avoid log creation error).
 	InitLogger();
@@ -332,10 +334,10 @@ void CMP3_RecorderApp::InitLogger()
 	if (haveLog3 || haveLog2)
 		CLog::Open(log3Path);
 	else
-	if (haveLog1)
-		CLog::Open(log2Path);
-	else
-		CLog::Open(log1Path);
+		if (haveLog1)
+			CLog::Open(log2Path);
+		else
+			CLog::Open(log1Path);
 }
 //---------------------------------------------------------------------------
 
@@ -348,23 +350,23 @@ CString CMP3_RecorderApp::GetWindowsVersionString() const
 	if (::IsWindows8Point1OrGreater())
 		version = _T("8.1");
 	else
-	if (::IsWindows8OrGreater())
-		version = _T("8.0");
-	else
-	if (::IsWindows7SP1OrGreater())
-		version = _T("7 (SP1)");
-	else
-	if (::IsWindows7OrGreater())
-		version = _T("7");
-	else
-	if (::IsWindowsVistaSP2OrGreater())
-		version = _T("Vista (SP2)");
-	else
-	if (::IsWindowsVistaSP1OrGreater())
-		version = _T("Vista (SP1)");
-	else
-	if (::IsWindowsVistaOrGreater())
-		version = _T("Vista");
+		if (::IsWindows8OrGreater())
+			version = _T("8.0");
+		else
+			if (::IsWindows7SP1OrGreater())
+				version = _T("7 (SP1)");
+			else
+				if (::IsWindows7OrGreater())
+					version = _T("7");
+				else
+					if (::IsWindowsVistaSP2OrGreater())
+						version = _T("Vista (SP2)");
+					else
+						if (::IsWindowsVistaSP1OrGreater())
+							version = _T("Vista (SP1)");
+						else
+							if (::IsWindowsVistaOrGreater())
+								version = _T("Vista");
 
 	CString resultString;
 	resultString.Format(_T("Windows %s (or greater) %s"), version, IsWow64() ? _T("x64") : _T("x32"));
@@ -380,14 +382,14 @@ bool CMP3_RecorderApp::IsWow64() const
 	//Use GetModuleHandle to get a handle to the DLL that contains the function
 	//and GetProcAddress to get a pointer to the function if available.
 
-	typedef BOOL (WINAPI *LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
+	typedef BOOL(WINAPI* LPFN_ISWOW64PROCESS) (HANDLE, PBOOL);
 	LPFN_ISWOW64PROCESS fnIsWow64Process;
-	fnIsWow64Process = (LPFN_ISWOW64PROCESS) GetProcAddress(
-		GetModuleHandle(TEXT("kernel32")),"IsWow64Process");
+	fnIsWow64Process = (LPFN_ISWOW64PROCESS)GetProcAddress(
+		GetModuleHandle(TEXT("kernel32")), "IsWow64Process");
 
 	if (NULL != fnIsWow64Process)
 	{
-		if (!fnIsWow64Process(GetCurrentProcess(),&bIsWow64))
+		if (!fnIsWow64Process(GetCurrentProcess(), &bIsWow64))
 		{
 			//handle error
 		}
@@ -411,7 +413,7 @@ void CMP3_RecorderApp::OnHelpOpenLogFolder()
 }
 //---------------------------------------------------------------------------
 
-void CMP3_RecorderApp::OnHelpEmail() 
+void CMP3_RecorderApp::OnHelpEmail()
 {
 	CString mailString;
 	mailString.Format(_T("mailto:support@stepvoice.com?subject=[svrec %s]&body=(Please attach log files, accessible via program menu: Help | Open log folder)"),
@@ -422,9 +424,9 @@ void CMP3_RecorderApp::OnHelpEmail()
 }
 //---------------------------------------------------------------------------
 
-void CMP3_RecorderApp::OnHelpDoc() 
+void CMP3_RecorderApp::OnHelpDoc()
 {
-	CMainFrame* pFrame = (CMainFrame *)m_pMainWnd;
+	CMainFrame* pFrame = (CMainFrame*)m_pMainWnd;
 
 	using namespace FileUtils;
 	CString helpFile = CombinePath(GetProgramFolder(), _T("svrec.chm::/stepvoice_recorder/overview.html"));
@@ -434,7 +436,7 @@ void CMP3_RecorderApp::OnHelpDoc()
 
 bool CMP3_RecorderApp::GetUpdateInformation(CString& latestVersion, CString& downloadLink)
 {
-	LOG_DEBUG() << __FUNCTION__ <<" ::1";
+	LOG_DEBUG() << __FUNCTION__ << " ::1";
 	CWaitCursor waitCursor;
 
 	using namespace FileUtils;
@@ -448,7 +450,7 @@ bool CMP3_RecorderApp::GetUpdateInformation(CString& latestVersion, CString& dow
 	DeleteUrlCacheEntry(remoteFilePath);
 	HRESULT hr = URLDownloadToFile(NULL, remoteFilePath, localFilePath, 0, NULL);
 	if (hr != S_OK) {
-		LOG_DEBUG() << __FUNCTION__ <<" ::2, error, hr=" << int(hr);
+		LOG_DEBUG() << __FUNCTION__ << " ::2, error, hr=" << int(hr);
 		return false;
 	}
 
@@ -456,14 +458,14 @@ bool CMP3_RecorderApp::GetUpdateInformation(CString& latestVersion, CString& dow
 	tinyxml2::XMLDocument doc;
 	tinyxml2::XMLError err = doc.LoadFile(localFilePathAnsi);
 	if (err != tinyxml2::XML_SUCCESS) {
-		LOG_DEBUG() << __FUNCTION__ <<" ::3, error, unable to load xml file.";
+		LOG_DEBUG() << __FUNCTION__ << " ::3, error, unable to load xml file.";
 		return false;
 	}
 
 	latestVersion = doc.FirstChildElement()->FirstChildElement("LastVersion")->GetText();
-	downloadLink = doc.FirstChildElement()->FirstChildElement("DownloadLink")->GetText();	
+	downloadLink = doc.FirstChildElement()->FirstChildElement("DownloadLink")->GetText();
 	::DeleteFile(localFilePath);
-	LOG_DEBUG() << __FUNCTION__ <<" ::4, latestVersion=" << latestVersion << ", downloadLink=" << downloadLink;
+	LOG_DEBUG() << __FUNCTION__ << " ::4, latestVersion=" << latestVersion << ", downloadLink=" << downloadLink;
 	return true;
 }
 //---------------------------------------------------------------------------
@@ -475,14 +477,14 @@ void CMP3_RecorderApp::OnHelpCheckforupdates()
 	const CString msgError = L"Failed to retrieve update information.";
 
 	CString latestVersion, downloadLink;
-	if (!GetUpdateInformation(latestVersion, downloadLink))	{
-		::MessageBox(m_pMainWnd->GetSafeHwnd(), msgError, caption, MB_OK|MB_ICONSTOP);
+	if (!GetUpdateInformation(latestVersion, downloadLink)) {
+		::MessageBox(m_pMainWnd->GetSafeHwnd(), msgError, caption, MB_OK | MB_ICONSTOP);
 		return;
 	}
 
 	const CString curVersion(STRFILEVER);
 	if (curVersion >= latestVersion) {
-		::MessageBox(m_pMainWnd->GetSafeHwnd(), msgLatest, caption, MB_OK|MB_ICONINFORMATION);
+		::MessageBox(m_pMainWnd->GetSafeHwnd(), msgLatest, caption, MB_OK | MB_ICONINFORMATION);
 		return;
 	}
 
@@ -507,4 +509,3 @@ BOOL CMP3_RecorderApp::OnIdle(LONG lCount)
 	return FALSE;	// No more idle time needed
 }
 //---------------------------------------------------------------------------
-
