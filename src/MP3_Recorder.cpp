@@ -128,6 +128,7 @@ BOOL CAboutDlg::OnInitDialog()
 		_T("MPEG Layer-3 Audio Codec Lame 3.98.2\r\n(http://www.mp3dev.org/mp3)"),
 		_T("BASS library (bass.dll) by Ian Luck\r\n(http://www.un4seen.com)"),
 		_T("TinyXML-2 library by Lee Thomason\r\n(http://www.grinninglizard.com)"),
+		_T("Ruben Marchan"),
 		_T("")
 	};
 	CString l_wnd_text;
